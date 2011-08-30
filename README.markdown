@@ -15,7 +15,7 @@ well -- support might be added for this in the future.
 Installation
 ------------
 
-Grab it from [Hackage] (once I add it there):
+Grab it from [Hackage][] (once I add it there):
 
     cabal install dir-metadata
 
