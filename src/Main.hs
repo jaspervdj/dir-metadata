@@ -3,10 +3,12 @@ module Main
     ) where
 
 import Control.Monad (forM_)
-import System.Environment (getArgs)
-import System.Directory (getCurrentDirectory, makeRelativeToCurrentDirectory)
-import System.FilePath ((</>))
 import Data.Maybe (listToMaybe)
+import System.Environment (getArgs)
+import System.Directory ( canonicalizePath, getCurrentDirectory
+                        , makeRelativeToCurrentDirectory
+                        )
+import System.FilePath ((</>))
 
 import DirMetadata.Persist (persist, unpersist)
 import qualified DirMetadata as DM
@@ -29,7 +31,7 @@ getDir :: Maybe FilePath -> IO FilePath
 getDir (Just fp) = do
     dir <- makeRelativeToCurrentDirectory fp
     cd <- getCurrentDirectory
-    return $ cd </> dir
+    canonicalizePath $ cd </> dir
 getDir Nothing = getCurrentDirectory
 
 list :: [String] -> IO ()
