@@ -7,6 +7,7 @@ module DirMetadata
     , addAll
     , remove
     , removeAll
+    , clean
     ) where
 
 import Data.Maybe (fromMaybe)
@@ -38,3 +39,6 @@ remove fp is (DirMetadata dm) = DirMetadata $ M.update remove' fp dm
 
 removeAll :: FilePath -> DirMetadata -> DirMetadata
 removeAll fp = DirMetadata . M.delete fp . unDirMetadata
+
+clean :: DirMetadata -> DirMetadata
+clean = DirMetadata . M.filter (not . null) . unDirMetadata

@@ -11,7 +11,7 @@ import Data.Attoparsec (parseOnly)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as BL
 
-import DirMetadata (DirMetadata, empty)
+import DirMetadata (DirMetadata, empty, clean)
 
 persistFile :: IO FilePath
 persistFile = do
@@ -21,7 +21,7 @@ persistFile = do
 persist :: DirMetadata -> IO ()
 persist dm = do
     file <- persistFile
-    BL.writeFile file (encode dm)
+    BL.writeFile file (encode $ clean dm)
 
 unpersist :: IO DirMetadata
 unpersist = do
