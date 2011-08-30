@@ -1,0 +1,36 @@
+Name:     dir-metadata
+Version:  0.0.0.1
+
+Synopsis:
+  Simple CLI tool to add, list and manipulate metadata for humans per directory
+
+Description:
+  Simple CLI tool to add, list and manipulate metadata for humans per directory
+
+Homepage:      http://github.com/jaspervdj/dir-metadata
+License:       BSD3
+License-file:  LICENSE
+Author:        Jasper Van der Jeugt <m@jaspervdj.be>
+Maintainer:    Jasper Van der Jeugt <m@jaspervdj.be>
+Category:      Application
+Build-type:    Simple
+Cabal-version: >=1.2
+
+
+Executable dir-metadata
+  Hs-source-dirs: src
+  Main-is:        Main.hs
+  
+  Build-depends:       
+    aeson      >= 0.3  && < 0.4,
+    attoparsec >= 0.9  && < 0.10,
+    base       >= 4    && < 5,
+    bytestring >= 0.9  && < 0.10,
+    containers >= 0.3  && < 0.5,
+    directory  >= 1.0  && < 1.2,
+    filepath   >= 1.0  && < 1.3,
+    text       >= 0.10 && < 0.12
+
+  Other-modules:
+    DirMetadata
+    DirMetadata.Persist
