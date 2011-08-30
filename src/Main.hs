@@ -43,7 +43,7 @@ list args = do
 
 add :: [String] -> IO ()
 add args = do
-    t <- case args of [] -> T.getContents
+    t <- case args of [] -> fmap T.stripEnd T.getContents
                       _  -> return $ T.unwords $ map T.pack args
     dir <- getDir Nothing
     persist . DM.add dir t =<< unpersist
