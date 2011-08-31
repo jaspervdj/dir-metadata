@@ -7,6 +7,7 @@ module DirMetadata
     , addAll
     , remove
     , removeAll
+    , listDirs
     , clean
     ) where
 
@@ -39,6 +40,9 @@ remove fp is (DirMetadata dm) = DirMetadata $ M.update remove' fp dm
 
 removeAll :: FilePath -> DirMetadata -> DirMetadata
 removeAll fp = DirMetadata . M.delete fp . unDirMetadata
+
+listDirs :: DirMetadata -> [FilePath]
+listDirs = M.keys . unDirMetadata
 
 clean :: DirMetadata -> DirMetadata
 clean = DirMetadata . M.filter (not . null) . unDirMetadata

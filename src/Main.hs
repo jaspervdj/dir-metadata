@@ -20,9 +20,10 @@ main = do
     args <- getArgs
     case args of
         []            -> list []
-        ("ls"    : a) -> list a
         ("add"   : a) -> add a
         ("help"  : _) -> usage
+        ("ls"    : a) -> list a
+        ("lsd"   : _) -> listDirs
         ("rm"    : a) -> remove a
         ("usage" : _) -> usage
         _             -> usage
@@ -61,6 +62,9 @@ remove args = do
     persist . DM.remove dir is =<< unpersist
   where
     isInt = not . null . (reads :: ReadS Int)
+
+listDirs :: IO ()
+listDirs = unpersist >>= mapM_ putStrLn . DM.listDirs
 
 usage :: IO ()
 usage = undefined
