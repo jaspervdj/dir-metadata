@@ -68,4 +68,33 @@ we're done with (1) and (2):
 Reference
 ---------
 
-TODO
+### ls
+
+    dir-metadata
+    dir-metadata ls
+    dir-metadata ls dir
+
+List all metadata in the current directory, or the `dir` directory (if given).
+
+### add
+
+    dir-metadata add
+    dir-metadata add Item to add
+
+Add an item to the current directory. If this is not provided on the command
+line, the user will need to provide this on `stdin`.
+
+### rm
+
+    dir-metadata rm 1
+    dir-metadata rm 1 2 4
+    dir-metadata rm dir 1 4
+
+Remove the specified metadata items from the current directory, or `dir`.
+
+### lsd
+
+    dir-metadata lsd
+
+List directories: this prints out all directories which have metadata, one per
+line.
