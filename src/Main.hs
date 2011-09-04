@@ -4,10 +4,10 @@ module Main
 
 import Control.Monad (forM_)
 import Data.Maybe (listToMaybe)
-import System.Environment (getArgs)
 import System.Directory ( canonicalizePath, getCurrentDirectory
                         , makeRelativeToCurrentDirectory
                         )
+import System.Environment (getArgs)
 import System.FilePath ((</>))
 
 import DirMetadata.Persist (persist, unpersist)
@@ -24,6 +24,7 @@ main = do
         ("help"  : _) -> usage
         ("ls"    : a) -> list a
         ("lsd"   : _) -> listDirs
+        ("mv"    : a) -> move a
         ("rm"    : a) -> remove a
         ("usage" : _) -> usage
         _             -> usage
@@ -62,6 +63,20 @@ remove args = do
     persist . DM.remove dir is =<< unpersist
   where
     isInt = not . null . (reads :: ReadS Int)
+
+move :: [String] -> IO ()
+move args = do
+    dm <- unpersist
+    cur <- getDir Nothing
+    case args of
+        []  -> putStrLn "Operand needed"
+        [d] -> do
+            dir <- getDir (Just d)
+            persist $ DM.moveAll cur dir dm
+        _   -> do
+            dir <- getDir (Just $ last args)
+            let is = map read (init args)
+            persist $ DM.move cur is dir dm
 
 listDirs :: IO ()
 listDirs = unpersist >>= mapM_ putStrLn . DM.listDirs

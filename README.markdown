@@ -92,6 +92,14 @@ line, the user will need to provide this on `stdin`.
 
 Remove the specified metadata items from the current directory, or `dir`.
 
+### mv
+
+    dir-metadata mv dir
+    dit-metadata mv 1 3 dir
+
+Remove all metadata items, or a selection, from the current directory to the
+specified directory.
+
 ### lsd
 
     dir-metadata lsd
